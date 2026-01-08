@@ -1,7 +1,8 @@
 from evento import Evento
 
 class Agenda:
-    def __init__(self):
+    def __init__(self , nome):
+        self.nome = nome
         self.eventos = []
 
     def adicionar_evento(self, evento: Evento):

@@ -14,8 +14,8 @@ class Evento:
             return datetime.strptime(data, "%d/%m/%Y").date()
         except ValueError:
             raise ValueError("Data inválida use o formato dd/mm/aaaa")
-   
-        
+
+
         
     def verificar_nome(self, nome):
         if not isinstance(nome, str):
@@ -33,4 +33,10 @@ class Evento:
             return datetime.strptime(horario,"%H:%M").time()
         except ValueError:
             raise ValueError("horario invalido use o formato hh:mm")
-        
+    def __str__(self):
+        return (
+            f"{self.nome} - "
+            f"{self.data.strftime('%d/%m/%Y')} "
+            f"{self.horario.strftime('%H:%M')} - "
+            f"{self.contato.nome}"
+        )
