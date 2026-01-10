@@ -1,15 +1,23 @@
-from evento import Evento
+from contato import Contato
 
 class Agenda:
-    def __init__(self , nome):
-        self.nome = nome
-        self.eventos = []
+    def __init__(self):
+        self.contatos = []
 
-    def adicionar_evento(self, evento: Evento):
-        if not isinstance(evento, Evento):
-            raise TypeError("somente evento podem ser adicionados")
+    def adicionar_contato(self, contato:Contato):
+        if not isinstance(contato, Contato):
+            raise TypeError("somente contatos podem ser adicionados")
         
-        self.eventos.append(evento)
+        self.contatos.append(contato)
 
-    def listar_eventos(self):
-        return self.eventos.copy()
+    def listar_contatos(self):
+        for contatos in self.contatos:
+            print(f"{contatos.nome} - {contatos.telefone}")
+
+
+
+c1 = Contato("kliger", "1515121615")
+agd = Agenda()
+agd.adicionar_contato(c1)
+agd.listar_contatos()
+        
