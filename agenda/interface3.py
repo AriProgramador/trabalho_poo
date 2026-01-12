@@ -91,22 +91,24 @@ def criar_contato():
         if nome_pego == "":
             messagebox.showerror("erro", "nome do contato nao pode estar vazio!")
             return
-
+        if not numero_pego.isdigit():
+            messagebox.showerror("erro", "digite somente numeros")
+            return
         if len(numero_pego) != 8:
             messagebox.showerror("erro", "o numero deve conter 8 digitos")
             return
 
         Agenda.adicionar_contato(Contato(nome_pego, numero_pego))
         messagebox.showinfo("Sucesso", "Contato Adicionado")
-        botao2.config(state="disabled")  # desativa
+        botao_confirmar.config(state="disabled")  # desativa
         janela2.destroy()
 
-    botao2 = tk.Button(janela2, text="confirmar", command=adicionar)
-    botao2.pack()
+    botao_confirmar = tk.Button(janela2, text="confirmar", command=adicionar)
+    botao_confirmar.pack()
 
-botao = tk.Button(janela, text="Adicionar", command=criar_contato)
-botao.pack()
-
-botao_adicionar = tk.Button(janela, text="Listar contatos", command=listar_contatos)
+botao_adicionar= tk.Button(janela, text="Adicionar", command=criar_contato)
 botao_adicionar.pack()
+
+botao_listar = tk.Button(janela, text="Listar contatos", command=listar_contatos)
+botao_listar.pack()
 janela.mainloop()
