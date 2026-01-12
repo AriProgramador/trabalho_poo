@@ -41,10 +41,22 @@ def listar_contatos():
         lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
 
     for contato in contatos:
+        frame_contato = tk.Frame(rolamento_frame)
+        frame_contato.pack(padx=10, pady = 5, fill='x')
+
         texto_exibido =f"Nome:  {contato.nome} \n Telefone: {contato.telefone}"
 
-        contato_listado = tk.Label(rolamento_frame, text=texto_exibido,justify = "left" , anchor ='w')
-        contato_listado.pack(fill='x', padx = '10',pady = '5')
+        contato_listado = tk.Label(frame_contato, text=texto_exibido,justify = "left" , anchor ='w')
+        contato_listado.pack(fill='x', side = "left", expand = "True")
+
+        def remover_contato (c= contato, f = frame_contato):
+            if messagebox.askyesno("Confirmar",f"Deseja apagar o contato {c.nome}?"):
+                Agenda.apagar_contatos(c)
+                f.destroy()
+            messagebox.showinfo("Sucesso", "Contato apagado")
+
+        botao_remover = tk.Button(frame_contato, text="X", fg="white", bg="red", command=remover_contato)
+        botao_remover.pack(side="right", padx='5')
 
         framelinha = tk.Frame(rolamento_frame, height = 1, bg = "grey")
         framelinha.pack(fill="x",padx=5)
@@ -88,13 +100,13 @@ def criar_contato():
         messagebox.showinfo("Sucesso", "Contato Adicionado")
         botao2.config(state="disabled")  # desativa
         janela2.destroy()
+
     botao2 = tk.Button(janela2, text="confirmar", command=adicionar)
     botao2.pack()
 
-
-botao = tk.Button(janela, text="adicionar", command=criar_contato)
+botao = tk.Button(janela, text="Adicionar", command=criar_contato)
 botao.pack()
 
-botao_adicionar = tk.Button(janela, text="listar contatos", command=listar_contatos)
+botao_adicionar = tk.Button(janela, text="Listar contatos", command=listar_contatos)
 botao_adicionar.pack()
 janela.mainloop()
